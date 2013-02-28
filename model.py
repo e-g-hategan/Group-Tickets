@@ -6,26 +6,25 @@ class User(db.Model):
     user_id = db.StringProperty()
     nickname = db.StringProperty()
 
-class Schedule(db.Model):
+class Day(db.Model):
     """Models the travel preference for a user for a particular day."""
     date = db.DateProperty()
-    user_id = db.StringProperty()
-    schedule = db.StringProperty()
-    buying_tickets = db.BooleanProperty()
+    price = db.FloatProperty()
+    buyer = db.StringProperty()
+    users = db.StringProperty()
+    guests = db.StringProperty()
 
 class Price(db.Model):
     """Models the travel preference for a user for a particular day."""
-    price = db.FloatProperty()
-    people = db.IntegerProperty()
     since = db.DateProperty()
-    until = db.DateProperty()
+    prices = db.FloatProperty()
 
 def user_key():
     """Constructs a Datastore key for User."""
     return db.Key.from_path('User', 'default')
 
-def schedule_key():
-    """Constructs a Datastore key for Schedule."""
+def day_key():
+    """Constructs a Datastore key for Day."""
     return db.Key.from_path('Schedule', 'default')
 
 def price_key():
@@ -40,9 +39,19 @@ def clean_model(model, model_key):
     for item in items:
         item.delete()
 
-def set_day_price
-def set_day_buyer
-def set_day_user_schedule_type
-def set_day_user_guests
+def set_day_price(date, user_id, price):
+def set_day_buyer(date, user_id):
+def set_day_user_schedule_type(date, user_id, schedule_type):
+def set_day_user_guests(date, user_id, number_of_guests):
 
-def get_day
+def get_day(date):
+    {
+        'date': date,
+        'price': 23.4,
+        'buyer': 'george@swiftkey.net',
+        'users': {
+            'marek@swiftkey.net': 'Norm',
+            'george@swiftkey.net': 'Late',
+            'caroline@swiftkey.net': 'No'},
+        'guests': {
+            'george@swiftkey.net': 3}}
