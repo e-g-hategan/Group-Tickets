@@ -1,0 +1,37 @@
+application: sk-cambridge-commuters
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /resources
+  static_dir: resources
+
+- url: /prices
+  script: prices.app
+  secure: optional
+
+- url: /stats
+  script: stats.app
+  secure: optional
+
+- url: /settings
+  script: settings.app
+  secure: optional
+
+- url: /group
+  script: group.app
+  secure: optional
+
+- url: .*
+  script: my.app
+  secure: optional
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
