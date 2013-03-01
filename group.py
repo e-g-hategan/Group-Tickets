@@ -33,27 +33,20 @@ class MainHandler(AuthenticatedRequestHandler):
             imported = importer.import_data()
             users = imported['users']
             prices = imported['prices']
-            schedules = imported['schedules']
-            data = imported['data']
-
-            #                         print "<td><select>"
-            #                         for val in ["?", "Norm", "Late", "No"]:
-            #                             if cell == val:
-            #                                 print "<option selected>" + val + "</option>"
-            #                             else:
-            #                                 print "<option>" + val + "</option>" 
-            #                         print "</select></td>"
+            days = imported['days']
 
             template_values = {
                 'title': 'Group Schedule',
-                'page': 'group',                  
+                'page': 'group',
                 'nickname': user_info[0],
                 'logout_url': user_info[1],
                 'users': users,
-                'schedule': data
+                'prices': prices,
+                'days': days,
             }
+
             path = os.path.join(os.path.dirname(__file__), 'template.html')
-            self.response.out.write(template.render(path, template_values))        
+            self.response.out.write(template.render(path, template_values))
 
 app = webapp2.WSGIApplication([
     ('/group', MainHandler)

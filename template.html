@@ -56,34 +56,56 @@
 
     <div class="container">
 
-      {% if page == 'my' %}
-      <p>I'll have my schedule.</p>      
-      {% endif %}
+    {% if page == 'my' %}
+      <p>I'll have my schedule.</p>
+    {% endif %}
 
-      {% if page == 'group' %}
+    {% if page == 'group' %}
       <h1>Imported Users</h1>
       <table class="table">
       {% for user in users %}
         <tr>
-          <td>{{ user.nickname }} - {{ user.user_id }}</td>
+          <td>{{ user.nickname }}</td>
+          <td>{{ user.user_id }}</td>
         </tr>
       {% endfor %}
       </table>
 
+      <h1>Imported Prices</h1>
       <table class="table">
-      {% for row in schedule %}
+      {% for price in prices %}
         <tr>
-        {% for cell in row %}
-          <td>
-          {{ cell }}
-          </td>
-        {% endfor %}
+          <td>{{ price.since }}</td>
+          <td>{{ price.prices }}</td>
         </tr>
       {% endfor %}
-      </table> 
-      {% endif %}
+      </table>
 
-      {% if page == 'prices' %}
+      <h1>Imported Days</h1>
+      <table class="table">
+      {% for day in days %}
+        <tr>
+          <td>
+          {{ day.date }}
+          </td>
+          <td>
+          {{ day.price }}
+          </td>
+          <td>
+          {{ day.users }}
+          </td>
+          <td>
+          {{ day.guests }}
+          </td>
+          <td>
+          {{ day.buyer }}
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    {% endif %}
+
+    {% if page == 'prices' %}
       <table class="table">
       {% for prices_row in prices %}
         <tr>
@@ -95,16 +117,16 @@
         {% endfor %}
         </tr>
       {% endfor %}
-      </table>      
-      {% endif %}
+      </table>
+    {% endif %}
 
-      {% if page == 'stats' %}
-      <p>We'll have some nice stats but for now we'll do without them.</p>      
+    {% if page == 'stats' %}
+      <p>We'll have some nice stats but for now we'll do without them.</p>
       {% endif %}
 
       {% if page == 'settings' %}
-      <p>We'll have some user settings.</p>      
-      {% endif %}
+      <p>We'll have some user settings.</p>
+    {% endif %}
 
     </div> <!-- /container -->
 
