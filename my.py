@@ -24,19 +24,51 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import users
 from helper import AuthenticatedRequestHandler
 import csv
+import model
+import datetime
 
 class MainHandler(AuthenticatedRequestHandler):
-    def get(self):
+    def show_page(self):
         user_info = AuthenticatedRequestHandler.authenticate_user(self)
         if user_info:
+            my_days = []
+            today = datetime.date.today()
+            monday = today + datetime.timedelta(days=-today.weekday())
+            nickname = user_info[0]
+
+            for i in range(0, 7):
+            	date = monday + datetime.timedelta(days=i)
+                day = model.get_day(date)
+
+                my_day = dict()
+                my_day['date'] = date.strftime('%A, %d %h')
+                my_day['options'] = ['Norm','Late','No','?']
+                
+                if nickname in day['users']:
+                    my_day['selected'] = day['users'][nickname]
+                else:
+                    my_day['selected'] = '?'
+
+                my_days.append(my_day)
+
             template_values = {
                 'title': 'My Schedule',
                 'page': 'my',
                 'nickname': user_info[0],
                 'logout_url': user_info[1],
+                'my_days': my_days
             }
             path = os.path.join(os.path.dirname(__file__), 'template.html')
-            self.response.out.write(template.render(path, template_values))        
+            self.response.out.write(template.render(path, template_values)) 
+
+    def get(self):   
+        self.show_page()
+
+
+    def post(self):
+#        for key in self.request:
+#            print key
+        self.show_page()    
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)

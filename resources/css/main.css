@@ -1,0 +1,32 @@
+ul.my{
+    list-style-type:none;
+}
+
+ul.my div.date{
+    width:150px;
+    display:inline-block;
+}
+
+ul.my select, ul.my select option{
+    background-color:#efefef;
+    color:#CCCCCC;
+}
+
+ul.my select.No, ul.my select option.No{
+    background-color:#cccccc;
+    font-weight:bold;
+    color:black;
+}
+
+ul.my select.Norm, ul.my select option.Norm{
+    background-color:#3d85c6;
+    font-weight:bold;
+    color:white;
+}
+
+ul.my select.Late, ul.my select option.Late{
+    background-color:#a64d79;
+    font-weight:bold;
+    color:white;
+}
+
